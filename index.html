@@ -44,13 +44,13 @@
       for (let i = 0; i < words.length; i++) {
         const word = words[i];
 
-        // Add another soft hyphen after a random letter in each word
-        const wordWithAnotherSoftHyphen = insertSpecialCharacterRandomly(word, '\u00AD');
+        // Add soft hyphen after a random letter in each word
+        const wordWithHyphen = insertSpecialCharacterRandomly(word, '\u00AD');
 
         // Replace space with three-per-em space every two words
         const separator = (i % 2 === 0 && i > 0) ? '\u2004' : ' ';
 
-        processedWords.push(wordWithAnotherSoftHyphen + separator);
+        processedWords.push(wordWithHyphen + separator);
       }
 
       // Join the processed words to form the final sentence
