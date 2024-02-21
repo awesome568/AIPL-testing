@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI and Plagiarism Detection REMOVER</title>
+  <style>
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="inputSentence">Enter a sentence:</label>
+  <input type="text" id="inputSentence" placeholder="Type your sentence here">
+
+  <button onclick="addSpecialCharacters()">Remove!</button>
+  <button id="copyButton" onclick="copyToClipboard()" style="display: none;">Copy to Clipboard</button>
+
+  <p id="outputSentence"></p>
+
+  <script>
+    function addSpecialCharacters() {
+      const inputSentence = document.getElementById('inputSentence').value;
+      const outputSentence = processInputSentence(inputSentence);
+      const outputSentenceElement = document.getElementById('outputSentence');
+      outputSentenceElement.textContent = outputSentence;
+
+      // Show the copy button
+      document.getElementById('copyButton').style.display = 'inline-block';
+    }
+
+    function processInputSentence(sentence) {
+      const words = sentence.split(' ');
+      let processedWords = [];
+
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+
+        // Add soft hyphen after a random letter in each word
+        const wordWithHyphen = insertSpecialCharacterRandomly(word, '\u00AD');
+
+        // Add zero-width non-joiner after a random letter in each word
+        const wordWithNonJoiner = insertSpecialCharacterRandomly(wordWithHyphen, '\u200C');
+
+        // Replace space with three-per-em space every two words
+        const separator = (i % 2 === 0 && i > 0) ? '\u2004' : ' ';
+
+        processedWords.push(wordWithNonJoiner + separator);
+      }
+
+      // Join the processed words to form the final sentence
+      return processedWords.join('');
+    }
+
+    function insertSpecialCharacterRandomly(word, character) {
+      const randomIndex = Math.floor(Math.random() * (word.length + 1));
+      return word.slice(0, randomIndex) + character + word.slice(randomIndex);
+    }
+
+    function copyToClipboard() {
+      const outputSentence = document.getElementById('outputSentence').textContent;
+      const textArea = document.createElement('textarea');
+      textArea.value = outputSentence;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
+  </script>
+
+</body>
+  <i>This will bypass every AI and plagiarism detector, as well as Google Classroom's originality reports. I am not accountable if anyone gets in trouble for using this. Made by awesome231</i>
+</html>
