@@ -47,13 +47,13 @@
         // Add soft hyphen after a random letter in each word
         const wordWithHyphen = insertSpecialCharacterRandomly(word, '\u00AD');
 
-        // Add zero-width non-joiner after a random letter in each word
-        const wordWithNonJoiner = insertSpecialCharacterRandomly(wordWithHyphen, '\u200C');
+        // Add another hyphen after a random letter in each word
+        const wordWithAnotherHyphen = insertSpecialCharacterRandomly(wordWithHyphen, '-');
 
         // Replace space with three-per-em space every two words
         const separator = (i % 2 === 0 && i > 0) ? '\u2004' : ' ';
 
-        processedWords.push(wordWithNonJoiner + separator);
+        processedWords.push(wordWithAnotherHyphen + separator);
       }
 
       // Join the processed words to form the final sentence
